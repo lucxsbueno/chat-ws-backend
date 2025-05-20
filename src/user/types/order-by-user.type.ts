@@ -5,4 +5,6 @@ type OrderByUser = {
   username?: "asc" | "desc";
   avatar?: "asc" | "desc";
   bio?: "asc" | "desc";
+  createdAt?: "asc" | "desc";
+  updatedAt?: "asc" | "desc";
 };

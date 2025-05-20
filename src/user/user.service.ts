@@ -50,7 +50,16 @@ export class UserService {
     const take = limit;
 
     // Campos permitidos para ordenação
-    const validKeys = ["id", "name", "email", "username", "avatar", "bio"];
+    const validKeys = [
+      "id",
+      "name",
+      "email",
+      "username",
+      "avatar",
+      "bio",
+      "createdAt",
+      "updatedAt",
+    ];
     const validDirections = ["asc", "desc"];
 
     let orderBy: OrderByUser[] = [];
@@ -107,7 +116,7 @@ export class UserService {
     });
 
     if (!user) {
-      throw new NotFoundException("User not found");
+      throw new NotFoundException("Usuário não encontrado.");
     }
 
     return user;
@@ -119,7 +128,13 @@ export class UserService {
     });
 
     if (!user) {
-      throw new NotFoundException("User not found");
+      throw new NotFoundException("Usuário não encontrado.");
+    }
+
+    if (updateUserDto.password) {
+      throw new BadRequestException(
+        "A senha não pode ser atualizada diretamente. Por favor, use a função 'redefinir senha' para alterar sua senha.",
+      );
     }
 
     return this.prisma.user.update({
@@ -134,7 +149,7 @@ export class UserService {
     });
 
     if (!user) {
-      throw new NotFoundException("User not found");
+      throw new NotFoundException("Usuário não encontrado.");
     }
 
     return this.prisma.user.delete({
