@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id @default(cuid())
+  name        String
+  email       String       @unique
+  password    String
+  username    String      @default(cuid()) @unique
+  avatar      String?       @default("https://api.dicebear.com/9.x/notionists/svg?scale=100")
+  bio         String?
+  
+  channels    Channel[]
+  messages    Message[]
+  
+  connections Connection[] @relation("UserConnectionsRequester")
+  connectionsToMe Connection[] @relation("UserConnectionsAccepter")
+  
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  type      String
+  body      String
+
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Channel {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+
+  user        User?   @relation(fields: [userId], references: [id])
+  userId      String?
+
+  chat        Chat?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Chat {
+  id          String   @id @default(cuid())
+
+  messages    Message[]
+
+  channel     Channel  @relation(fields: [channelId], references: [id])
+  channelId   String   @unique
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Connection {
+  id          String     @id @default(cuid())
+  requester   User       @relation("UserConnectionsRequester", fields: [requesterId], references: [id])
+  requesterId String
+  accepter    User       @relation("UserConnectionsAccepter", fields: [accepterId], references: [id])
+  accepterId  String
+  status      ConnectionStatus
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+enum ConnectionStatus {
+  pending
+  accepted
+  rejected
+}
