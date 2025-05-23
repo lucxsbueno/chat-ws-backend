@@ -12,7 +12,7 @@ import { UserResponseDto } from "./dto/user-response.dto";
 import * as bcrypt from "bcrypt";
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -79,9 +79,9 @@ export class UserService {
       }
     }
 
-    // Se não tiver nenhum parâmetro válido, ordena por id asc por padrão
+    // Se não tiver nenhum parâmetro válido, ordena por createdAt asc por padrão
     if (orderBy.length === 0) {
-      orderBy = [{ id: "asc" }];
+      orderBy = [{ createdAt: "desc" }];
     }
 
     const users = await this.prisma.user.findMany({
