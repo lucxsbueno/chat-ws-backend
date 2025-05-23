@@ -10,32 +10,34 @@ import {
   DefaultValuePipe,
   ParseIntPipe,
 } from "@nestjs/common";
-import { UserService } from "./user.service";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
-import { ApiOperation, ApiQuery, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiQuery } from "@nestjs/swagger";
+import { ChannelsService } from "./channels.service";
+import { CreateChannelDto } from "./dto/create-channel.dto";
+import { UpdateChannelDto } from "./dto/update-channel.dto";
+import { ApiResponse } from "@nestjs/swagger";
+import { UpdateUserDto } from "src/users/dto/update-user.dto";
 
-@Controller("users")
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+@Controller("channels")
+export class ChannelsController {
+  constructor(private readonly channelsService: ChannelsService) {}
 
   @Post()
-  @ApiOperation({ summary: "Create a new user" })
+  @ApiOperation({ summary: "Create a new channel" })
   @ApiResponse({
     status: 201,
-    description: "The user has been successfully created.",
+    description: "The channel has been successfully created.",
   })
   @ApiResponse({ status: 400, description: "Bad request." })
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  async create(@Body() createChannelDto: CreateChannelDto) {
+    return await this.channelsService.create(createChannelDto);
   }
 
   @Get()
-  @ApiOperation({ summary: "Get all users" })
+  @ApiOperation({ summary: "Get all channels" })
   @ApiQuery({
     name: "search",
     required: false,
-    description: "Search term for users",
+    description: "Search term for channels",
   })
   @ApiQuery({
     name: "page",
@@ -52,17 +54,18 @@ export class UserController {
   @ApiQuery({
     name: "sort",
     required: false,
-    description: "Sorting keys and directions, e.g. 'name:asc,email:desc'",
+    description:
+      "Sorting keys and directions, e.g. 'name:asc,description:desc'",
     type: String,
   })
-  @ApiResponse({ status: 200, description: "Return all users." })
+  @ApiResponse({ status: 200, description: "Return all channels." })
   findAll(
     @Query("search", new DefaultValuePipe("")) search: string,
     @Query("page", new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query("limit", new DefaultValuePipe(5), ParseIntPipe) limit: number,
     @Query("sort", new DefaultValuePipe("")) sort: string,
   ) {
-    return this.userService.findAll(search, page, limit, sort);
+    return this.channelsService.findAll(search, page, limit, sort);
   }
 
   @Get(":id")
@@ -70,7 +73,7 @@ export class UserController {
   @ApiResponse({ status: 200, description: "Return the user." })
   @ApiResponse({ status: 404, description: "User not found." })
   findOne(@Param("id") id: string) {
-    return this.userService.findOne(id);
+    return this.channelsService.findOne(id);
   }
 
   @Patch(":id")
@@ -78,7 +81,7 @@ export class UserController {
   @ApiResponse({ status: 200, description: "Return the user." })
   @ApiResponse({ status: 404, description: "User not found." })
   update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(id, updateUserDto);
+    return this.channelsService.update(id, updateUserDto);
   }
 
   @Delete(":id")
@@ -89,6 +92,6 @@ export class UserController {
   })
   @ApiResponse({ status: 404, description: "User not found." })
   remove(@Param("id") id: string) {
-    return this.userService.remove(id);
+    return this.channelsService.remove(id);
   }
 }

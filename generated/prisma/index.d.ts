@@ -3775,7 +3775,7 @@ export namespace Prisma {
   export type ChannelGroupByOutputType = {
     id: string
     name: string
-    description: string
+    description: string | null
     userId: string | null
     createdAt: Date
     updatedAt: Date
@@ -3859,7 +3859,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
-      description: string
+      description: string | null
       userId: string | null
       createdAt: Date
       updatedAt: Date
@@ -7177,7 +7177,7 @@ export namespace Prisma {
     NOT?: ChannelWhereInput | ChannelWhereInput[]
     id?: StringFilter<"Channel"> | string
     name?: StringFilter<"Channel"> | string
-    description?: StringFilter<"Channel"> | string
+    description?: StringNullableFilter<"Channel"> | string | null
     userId?: StringNullableFilter<"Channel"> | string | null
     createdAt?: DateTimeFilter<"Channel"> | Date | string
     updatedAt?: DateTimeFilter<"Channel"> | Date | string
@@ -7188,7 +7188,7 @@ export namespace Prisma {
   export type ChannelOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7202,7 +7202,7 @@ export namespace Prisma {
     OR?: ChannelWhereInput[]
     NOT?: ChannelWhereInput | ChannelWhereInput[]
     name?: StringFilter<"Channel"> | string
-    description?: StringFilter<"Channel"> | string
+    description?: StringNullableFilter<"Channel"> | string | null
     userId?: StringNullableFilter<"Channel"> | string | null
     createdAt?: DateTimeFilter<"Channel"> | Date | string
     updatedAt?: DateTimeFilter<"Channel"> | Date | string
@@ -7213,7 +7213,7 @@ export namespace Prisma {
   export type ChannelOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7228,7 +7228,7 @@ export namespace Prisma {
     NOT?: ChannelScalarWhereWithAggregatesInput | ChannelScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Channel"> | string
     name?: StringWithAggregatesFilter<"Channel"> | string
-    description?: StringWithAggregatesFilter<"Channel"> | string
+    description?: StringNullableWithAggregatesFilter<"Channel"> | string | null
     userId?: StringNullableWithAggregatesFilter<"Channel"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Channel"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Channel"> | Date | string
@@ -7521,7 +7521,7 @@ export namespace Prisma {
   export type ChannelCreateInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutChannelsInput
@@ -7531,7 +7531,7 @@ export namespace Prisma {
   export type ChannelUncheckedCreateInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7541,7 +7541,7 @@ export namespace Prisma {
   export type ChannelUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutChannelsNestedInput
@@ -7551,7 +7551,7 @@ export namespace Prisma {
   export type ChannelUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7561,7 +7561,7 @@ export namespace Prisma {
   export type ChannelCreateManyInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7570,7 +7570,7 @@ export namespace Prisma {
   export type ChannelUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7578,7 +7578,7 @@ export namespace Prisma {
   export type ChannelUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8475,7 +8475,7 @@ export namespace Prisma {
   export type ChannelCreateWithoutUserInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     chat?: ChatCreateNestedOneWithoutChannelInput
@@ -8484,7 +8484,7 @@ export namespace Prisma {
   export type ChannelUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     chat?: ChatUncheckedCreateNestedOneWithoutChannelInput
@@ -8598,7 +8598,7 @@ export namespace Prisma {
     NOT?: ChannelScalarWhereInput | ChannelScalarWhereInput[]
     id?: StringFilter<"Channel"> | string
     name?: StringFilter<"Channel"> | string
-    description?: StringFilter<"Channel"> | string
+    description?: StringNullableFilter<"Channel"> | string | null
     userId?: StringNullableFilter<"Channel"> | string | null
     createdAt?: DateTimeFilter<"Channel"> | Date | string
     updatedAt?: DateTimeFilter<"Channel"> | Date | string
@@ -8947,7 +8947,7 @@ export namespace Prisma {
   export type ChannelCreateWithoutChatInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutChannelsInput
@@ -8956,7 +8956,7 @@ export namespace Prisma {
   export type ChannelUncheckedCreateWithoutChatInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     userId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8997,7 +8997,7 @@ export namespace Prisma {
   export type ChannelUpdateWithoutChatInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutChannelsNestedInput
@@ -9006,7 +9006,7 @@ export namespace Prisma {
   export type ChannelUncheckedUpdateWithoutChatInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9167,7 +9167,7 @@ export namespace Prisma {
   export type ChannelCreateManyUserInput = {
     id?: string
     name: string
-    description: string
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9200,7 +9200,7 @@ export namespace Prisma {
   export type ChannelUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     chat?: ChatUpdateOneWithoutChannelNestedInput
@@ -9209,7 +9209,7 @@ export namespace Prisma {
   export type ChannelUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     chat?: ChatUncheckedUpdateOneWithoutChannelNestedInput
@@ -9218,7 +9218,7 @@ export namespace Prisma {
   export type ChannelUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
