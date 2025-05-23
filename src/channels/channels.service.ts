@@ -88,6 +88,13 @@ export class ChannelsService {
           { description: { contains: search } },
         ],
       },
+      include: {
+        chat: {
+          select: {
+            id: true,
+          },
+        },
+      },
       skip,
       take,
       orderBy,
